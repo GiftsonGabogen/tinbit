@@ -25,7 +25,7 @@ function Register() {
   // error message
   const [error, setError] = useState("");
 
-  const onLoginSuccess = async (codeResponse: { code: string }) => {
+  const onRegisterAuthSuccess = async (codeResponse: { code: string }) => {
     const tokens = await fetch("http://localhost:8000/api/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -59,7 +59,7 @@ function Register() {
 
   const loggingIn = useGoogleLogin({
     flow: "auth-code",
-    onSuccess: onLoginSuccess,
+    onSuccess: onRegisterAuthSuccess,
     onError: (errorResponse) => console.log(errorResponse),
   });
 

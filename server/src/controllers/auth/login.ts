@@ -8,7 +8,6 @@ import Pool from "@utils/db";
 const oAuth2Client = NewOAuthClient();
 
 export default async (req: Request, res: Response) => {
-  console.log(req.body.code);
   const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
   const tokenInfo = await oAuth2Client.getTokenInfo(tokens.access_token);
 
@@ -23,17 +22,17 @@ export default async (req: Request, res: Response) => {
       profile_pic_url: profilePicUrl,
     } = User.rows[0];
     const { access_token, refresh_token } = tokens;
-    res
-      .status(200)
-      .json({
-        firstName,
-        lastName,
-        email,
-        profilePicUrl,
-        access_token,
-        refresh_token,
-      });
+    res.status(200).json({
+      firstName,
+      lastName,
+      email,
+      profilePicUrl,
+      access_token,
+      refresh_token,
+    });
   } else {
-    res.status(403);
+    res
+      .status(403)
+      .json({ statusMessage: "Failed", message: "email does not exist" });
   }
 };

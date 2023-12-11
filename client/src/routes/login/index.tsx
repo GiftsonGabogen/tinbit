@@ -1,11 +1,14 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import useLocalStorage from "../../components/hooks/useLocalStorage";
 import { useDispatch } from "react-redux";
 import { setUser } from "features/user/userSlice";
 
 function Login() {
-  // User Details
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location?.state?.from?.pathname || "/";
   // tokens
   const [setAccessTokenItem] = useLocalStorage("access_token");
   const [setRefreshTokenItem] = useLocalStorage("refresh_token");
@@ -40,7 +43,7 @@ function Login() {
       );
       setAccessTokenItem(access_token);
       setRefreshTokenItem(refresh_token);
-      setError("Successfully Loggined");
+      navigate(from);
     } else {
       setError("Email is not registered");
     }
