@@ -1,0 +1,41 @@
+# Ignore node_modules directory for both client and server
+node_modules/
+
+# Ignore build output for both client and server
+build/
+dist/
+
+# Ignore environment files
+.env
+
+# Ignore logs and other generated files for both client and server
+*.log
+
+# Ignore client build output (assuming client is in a 'client' directory)
+client/build/
+client/dist/
+
+# Ignore server build output (assuming server is in a 'server' directory)
+server/build/
+server/dist/
+
+# Ignore any other project-specific files or directories
+# ...
+
+# Ignore Visual Studio Code settings (if using VSCode)
+.vscode/
+
+# Ignore JetBrains settings (if using JetBrains IDEs)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Ignore npm debug log (if any)
+npm-debug.log*
+
+# Ignore yarn error log (if any)
+yarn-error.log
+
+# Ignore macOS system files
+.DS_Store
