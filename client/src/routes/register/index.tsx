@@ -1,11 +1,12 @@
 import { useState } from "react";
-import type { FormEvent } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import useLocalStorage, { LocalStorageEnum } from "../../hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "features/user/userSlice";
 import { getUser } from "features/user/userSelectors";
 import BigGoogleButtonIcon from "routes/Common/BigGoogleButtonIcon";
+import type { FormEvent } from "react";
+import type { CodeResponse, NonOAuthError } from "@react-oauth/google";
 
 function Register() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,7 +30,7 @@ function Register() {
   const dispatch = useDispatch();
   // error message
   const [error, setError] = useState("");
-
+  // FIXME: refactor this, duplicate code with login page
   const onRegisterAuthSuccess = async (codeResponse: { code: string }) => {
     const tokens = await fetch("http://localhost:8000/api/auth", {
       method: "POST",
@@ -61,11 +62,28 @@ function Register() {
     setIsLoading(false);
     setLoggedIn(true);
   };
+  const onLoginError = async (
+    errorResponse: Pick<
+      CodeResponse,
+      "error" | "error_description" | "error_uri"
+    >
+  ) => {
+    const { error, error_description } = errorResponse;
+    console.log(error);
+    setError(error_description || "");
+    setIsLoading(false);
+  };
+  const onNonAuth = async (nonOAuthErr: NonOAuthError) => {
+    const errorText = nonOAuthErr.type.replace("_", " ");
+    setError(errorText);
+    setIsLoading(false);
+  };
 
   const loggingIn = useGoogleLogin({
     flow: "auth-code",
     onSuccess: onRegisterAuthSuccess,
-    onError: (errorResponse) => console.log(errorResponse),
+    onError: onLoginError,
+    onNonOAuthError: onNonAuth,
   });
 
   const handleRegisterSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -94,6 +112,7 @@ function Register() {
   };
 
   const googleLogin = () => {
+    setError("");
     setIsLoading(true);
     loggingIn();
   };
