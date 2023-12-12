@@ -1,9 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import useLocalStorage, {
-  LocalStorageEnum,
-} from "../../components/hooks/useLocalStorage";
+import useLocalStorage, { LocalStorageEnum } from "../../hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "features/user/userSlice";
 import { getUser } from "features/user/userSelectors";

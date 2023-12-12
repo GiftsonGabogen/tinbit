@@ -11,11 +11,11 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import Layout from "./Layout";
 import ErrorPage from "./error-page";
-import Register from "routes/register";
+import Register from "routes/Register";
 import Home from "routes/Home";
-import Login from "routes/login";
+import Login from "routes/Login";
 import RequireAuth from "components/RequireAuth";
-import MyAccount from "routes/myAccount";
+import MyAccount from "routes/MyAccount";
 import "./index.css";
 
 const router = createBrowserRouter(

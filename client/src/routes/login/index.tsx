@@ -2,9 +2,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import useLocalStorage, {
-  LocalStorageEnum,
-} from "../../components/hooks/useLocalStorage";
+import useLocalStorage, { LocalStorageEnum } from "../../hooks/useLocalStorage";
 import { useDispatch } from "react-redux";
 import { setUser } from "features/user/userSlice";
 
