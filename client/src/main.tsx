@@ -16,6 +16,7 @@ import Home from "routes/Home";
 import Login from "routes/login";
 import RequireAuth from "components/RequireAuth";
 import MyAccount from "routes/myAccount";
+import "./index.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

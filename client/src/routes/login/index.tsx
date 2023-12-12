@@ -1,7 +1,9 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import useLocalStorage from "../../components/hooks/useLocalStorage";
+import useLocalStorage, {
+  LocalStorageEnum,
+} from "../../components/hooks/useLocalStorage";
 import { useDispatch } from "react-redux";
 import { setUser } from "features/user/userSlice";
 
@@ -10,8 +12,12 @@ function Login() {
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
   // tokens
-  const [setAccessTokenItem] = useLocalStorage("access_token");
-  const [setRefreshTokenItem] = useLocalStorage("refresh_token");
+  const { setItem: setAccessTokenItem } = useLocalStorage(
+    LocalStorageEnum.ACCESS_TOKEN
+  );
+  const { setItem: setRefreshTokenItem } = useLocalStorage(
+    LocalStorageEnum.REFRESH_TOKEN
+  );
   const dispatch = useDispatch();
   // error message
   const [error, setError] = useState("");

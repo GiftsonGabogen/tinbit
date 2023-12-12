@@ -12,10 +12,14 @@ Register
 
 Login
 
-- [ ] C - go to a protected route
-- [ ] C - check state(memory) if there is a user login, access granted else
-- [ ] C - check the access and refresh token from local storage or cookie, then validate on backend.
+- [x] C - go to a protected route
+- [x] C - check state(memory) if there is a user login, access granted else
+- [ ] C - check the access and refresh token from local storage or cookie, then validate on backend. [SKIPPED]
 - [ ] S - validate tokens, if access is expired, get new access token using refresh. if successful, send back to
+
+CSS
+
+- [ ] - menu: Logo, My Account, Hamburger - Home, Urls, About
 
 Improvements
 

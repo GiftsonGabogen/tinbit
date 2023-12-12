@@ -1,7 +1,9 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import useLocalStorage from "../../components/hooks/useLocalStorage";
+import useLocalStorage, {
+  LocalStorageEnum,
+} from "../../components/hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "features/user/userSlice";
 import { getUser } from "features/user/userSelectors";
@@ -19,8 +21,12 @@ function Register() {
   // tokens
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
-  const [setAccessTokenItem] = useLocalStorage("access_token");
-  const [setRefreshTokenItem] = useLocalStorage("refresh_token");
+  const { setItem: setAccessTokenItem } = useLocalStorage(
+    LocalStorageEnum.ACCESS_TOKEN
+  );
+  const { setItem: setRefreshTokenItem } = useLocalStorage(
+    LocalStorageEnum.REFRESH_TOKEN
+  );
   const dispatch = useDispatch();
   // error message
   const [error, setError] = useState("");
