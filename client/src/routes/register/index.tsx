@@ -5,6 +5,7 @@ import useLocalStorage, { LocalStorageEnum } from "../../hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "features/user/userSlice";
 import { getUser } from "features/user/userSelectors";
+import BigGoogleButtonIcon from "routes/Common/BigGoogleButtonIcon";
 
 function Register() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -103,9 +104,12 @@ function Register() {
 
   const displayNotLoading = () => {
     return !loggedIn ? (
-      <div style={{ minWidth: "200px" }}>
-        <button onClick={() => googleLogin()}>register with google</button>
-      </div>
+      <BigGoogleButtonIcon
+        googleLogin={googleLogin}
+        isLoading={isLoading}
+        error={error}
+        buttonText="register with google"
+      />
     ) : (
       <>
         {error}

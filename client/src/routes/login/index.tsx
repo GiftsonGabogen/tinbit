@@ -1,10 +1,10 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import useLocalStorage, { LocalStorageEnum } from "../../hooks/useLocalStorage";
 import { useDispatch } from "react-redux";
 import { setUser } from "features/user/userSlice";
+import BigGoogleButtonIcon from "routes/Common/BigGoogleButtonIcon";
 
 function Login() {
   // error message
@@ -68,30 +68,12 @@ function Login() {
     loggingIn();
   };
   return (
-    <div className="flex h-screen w-screen justify-center">
-      {error && (
-        <div className="flex fixed top-0 w-screen justify-center p-6">
-          <div className="p-3 rounded bg-red-400 text-gray-200">{error}</div>
-        </div>
-      )}
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <div className="flex items-center">
-          <div className="flex flex-col items-center w-auto h-fit rounded-md p-16 bg-gray-800 hover:bg-gray-300  transition-all duration-300 ease-linear group">
-            <button
-              onClick={() => googleLogin()}
-              className="cursor-pointer mb-5"
-            >
-              <FcGoogle size="258" />
-            </button>
-            <h2 className="font-light text-gray-200 group-hover:text-gray-800 transition-all duration-300 ease-linear">
-              login with google
-            </h2>
-          </div>
-        </div>
-      )}
-    </div>
+    <BigGoogleButtonIcon
+      googleLogin={googleLogin}
+      isLoading={isLoading}
+      error={error}
+      buttonText="login with google"
+    />
   );
 }
 
