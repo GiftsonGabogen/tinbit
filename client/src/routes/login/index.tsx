@@ -1,6 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
 import useLocalStorage, {
   LocalStorageEnum,
 } from "../../components/hooks/useLocalStorage";
@@ -68,14 +69,22 @@ function Login() {
     loggingIn();
   };
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="flex h-screen w-screen justify-center">
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <div style={{ minWidth: "200px" }}>
-          {error}
-          <button onClick={() => googleLogin()}>login with google</button>
+        <div className="flex items-center ">
+          <div className="flex flex-col items-center w-auto h-fit rounded-md p-16 bg-gray-800 hover:bg-gray-300  transition-all duration-300 ease-linear group">
+            <button
+              onClick={() => googleLogin()}
+              className="cursor-pointer mb-5"
+            >
+              <FcGoogle size="258" />
+            </button>
+            <h2 className="font-light text-gray-200 group-hover:text-gray-800 transition-all duration-300 ease-linear">
+              login with google
+            </h2>
+          </div>
         </div>
       )}
     </div>
