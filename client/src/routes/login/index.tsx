@@ -93,6 +93,10 @@ function Login() {
       isLoading={isLoading}
       error={error}
       buttonText="login with google"
+      subCard={{
+        linkTo: "/register",
+        texts: ["not registered?", "registration"],
+      }}
     />
   );
 }

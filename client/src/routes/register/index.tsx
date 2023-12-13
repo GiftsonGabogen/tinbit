@@ -129,6 +129,10 @@ function Register() {
         isLoading={isLoading}
         error={error}
         buttonText="register with google"
+        subCard={{
+          linkTo: "/login",
+          texts: ["already registered?", "login"],
+        }}
       />
     ) : (
       <>
