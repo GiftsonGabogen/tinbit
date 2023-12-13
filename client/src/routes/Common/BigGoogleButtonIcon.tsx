@@ -14,7 +14,7 @@ function BigGoogleButtonIcon({
   googleLogin,
 }: BigGoogleButtonIconType) {
   return (
-    <div className="flex h-screen w-screen justify-center">
+    <div className="flex h-full w-screen justify-center">
       {error && (
         <div className="flex fixed top-0 w-screen justify-center p-6">
           <div className="p-3 rounded bg-red-400 text-gray-200">{error}</div>
@@ -24,7 +24,7 @@ function BigGoogleButtonIcon({
         <div>Loading...</div>
       ) : (
         <div className="flex items-center">
-          <div className="flex flex-col items-center w-auto h-fit rounded-md p-16 bg-gray-800 hover:bg-gray-300  transition-all duration-300 ease-linear group">
+          <div className="flex flex-col items-center w-auto h-fit rounded-md p-16 bg-gray-800 hover:bg-gray-300 hover:rounded-sm  transition-all duration-300 ease-linear group ">
             <button
               onClick={() => googleLogin()}
               className="cursor-pointer mb-5"

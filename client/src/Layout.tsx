@@ -7,9 +7,9 @@ function Layout() {
   const noSideBarUrls = ["/login", "/register"];
   const isOnNoSideBarUrl = noSideBarUrls.includes(location.pathname);
   return (
-    <div className="flex">
+    <div className="flex h-full">
       {!isOnNoSideBarUrl && <Sidebar />}
-      <div className={`${!isOnNoSideBarUrl && "pl-16"}`}>
+      <div className={`${!isOnNoSideBarUrl && "pl-16"} w-full`}>
         <Outlet />
       </div>
     </div>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "features/user/userSlice";
 import { getUser } from "features/user/userSelectors";
 import BigGoogleButtonIcon from "routes/Common/BigGoogleButtonIcon";
+import Input from "routes/Common/Input";
 import type { FormEvent } from "react";
 import type { CodeResponse, NonOAuthError } from "@react-oauth/google";
 
@@ -132,23 +133,21 @@ function Register() {
     ) : (
       <>
         {error}
-        <form onSubmit={handleRegisterSubmit}>
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">register</button>
+        <form
+          onSubmit={handleRegisterSubmit}
+          className="flex items-center h-full"
+        >
+          <div className="max-w-[400px] mx-auto">
+            <Input type="text" value={firstName} onChange={setFirstName} />
+            <Input type="text" value={lastName} onChange={setLastName} />
+            <Input type="password" value={password} onChange={setPassword} />
+            <button
+              type="submit"
+              className="block text-center w-full mt-4 rounded-md p-2 bg-gray-400 hover:bg-gray-700 text-gray-800 hover:text-gray-300 transition-all duration-300 ease-linear"
+            >
+              register
+            </button>
+          </div>
         </form>
       </>
     );
