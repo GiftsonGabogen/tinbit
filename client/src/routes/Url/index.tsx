@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "./Modal";
 
 const urls: ShortUrlType[] = [
@@ -26,23 +26,23 @@ const urls: ShortUrlType[] = [
     ],
   },
   {
-    id: 1,
-    name: "sample bags",
+    id: 2,
+    name: "sample bags ph",
     shortUrl: "https://tinbit.co/asddw",
     urls: [
       {
         urlId: 1,
-        link: "https://amazon.com/bag1",
-        website: "amazon",
-        name: "amazon bag",
+        link: "https://lazada.com/bag1",
+        website: "lazada",
+        name: "lazada bag",
         image:
           "https://brandlogos.net/wp-content/uploads/2016/10/amazon-logo-preview.png",
       },
       {
         urlId: 2,
-        link: "https://bestbuy.com/bag2",
-        website: "bestbuy",
-        name: "bestbuy bag",
+        link: "https://shopee.com/bag2",
+        website: "shopee",
+        name: "shopee bag",
         image:
           "https://brandlogos.net/wp-content/uploads/2021/05/best-buy-logo.png",
       },
@@ -69,6 +69,12 @@ const Url = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [currentLink, setCurrentLink] = useState<ShortUrlType>();
 
+  useEffect(() => {
+    if (urls.length > 0) {
+      setCurrentLink(urls[0]);
+    }
+  }, []);
+
   const openModal = (id: ShortUrlType["id"]) => {
     const currentObject = urls.find((url) => url.id === id);
     setCurrentLink(currentObject!);
@@ -80,18 +86,23 @@ const Url = () => {
   return (
     <>
       <h1 className="text-h2 text-center mb-4">Url</h1>
-      <div className="flex h-full justify-center">
+      <div className="flex h-full justify-center w-full">
         <div
-          className={`border-gray-400 w-full h-fit flex flex-wrap gap-4${
+          className={`border-gray-400 grow-[2] h-fit flex flex-wrap gap-4${
             !urls.length ? " justify-center" : ""
           }`}
         >
           <div className="basis-full">
             {urls.length > 0 &&
               urls.map((url) => {
+                console.log(url.id === currentLink?.id);
                 return (
                   <div
-                    className="w-full bg-gray-50 border-b border-gray-200 px-6 py-2"
+                    className={`w-full bg-gray-50 ${
+                      url.id === currentLink?.id
+                        ? "md:bg-gray-200"
+                        : "md:bg-gray-50"
+                    } border-b border-gray-200 px-6 py-2 cursor-pointer`}
                     key={url.id}
                     onClick={() => openModal(url.id)}
                   >
@@ -105,7 +116,12 @@ const Url = () => {
             create link
           </button>
         </div>
-        <Modal open={isModalOpen} link={currentLink} close={closeModal} />
+        <Modal
+          open={isModalOpen}
+          link={currentLink}
+          close={closeModal}
+          className="grow-[6]"
+        />
       </div>
     </>
   );
