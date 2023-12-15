@@ -9,7 +9,11 @@ function Layout() {
   return (
     <div className="flex h-full">
       {!isOnNoSideBarUrl && <Sidebar />}
-      <div className={`${!isOnNoSideBarUrl && "pl-16"} w-full`}>
+      <div
+        className={`${
+          !isOnNoSideBarUrl && "pl-4 pr-4 pt-20 pb-4 md:pt-8 md:pl-24"
+        } w-full bg-gray-300`}
+      >
         <Outlet />
       </div>
     </div>

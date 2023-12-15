@@ -20,7 +20,7 @@ Login
 CSS
 
 - [x] - menu: Logo, My Account, Hamburger - Home, Urls, About
-- [ ] - Register field
+- [x] - Register field
 - [ ] - My Account
 
 URL Shortener
