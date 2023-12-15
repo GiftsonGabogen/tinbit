@@ -1,9 +1,19 @@
-function Icon({ icon, text }: { icon: React.ReactNode; text: string }) {
+import { Link } from "react-router-dom";
+
+function Icon({
+  icon,
+  text,
+  link,
+}: {
+  icon: React.ReactNode;
+  text: string;
+  link: string;
+}) {
   return (
-    <div className="sidebar-icon group">
+    <Link to={"/" + link} className="sidebar-icon group">
       {icon}{" "}
       <span className="sidebar-tooltip group-hover:scale-100">{text}</span>
-    </div>
+    </Link>
   );
 }
 

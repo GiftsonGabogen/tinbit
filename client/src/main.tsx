@@ -16,6 +16,7 @@ import Home from "routes/Home";
 import Login from "routes/Login";
 import RequireAuth from "components/RequireAuth";
 import MyAccount from "routes/MyAccount";
+import Url from "routes/Url";
 import "./index.css";
 
 const router = createBrowserRouter(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       {/* protected routes */}
       <Route element={<RequireAuth />}>
         <Route element={<MyAccount />} path="me" />
+        <Route element={<Url />} path="urls" />
       </Route>
     </Route>
   )
