@@ -15,6 +15,7 @@ CREATE TABLE website (
 CREATE TABLE url (
    url_id serial PRIMARY KEY,
    link TEXT NOT NULL,
+   url_name TEXT,
    short_url_id INT REFERENCES short_url(short_url_id) ON DELETE CASCADE
 );
 
