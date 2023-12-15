@@ -57,7 +57,7 @@ export interface ShortUrlType {
   urls: UrlType[];
 }
 
-interface UrlType {
+export interface UrlType {
   urlId: string | number;
   link: string;
   website: string;
