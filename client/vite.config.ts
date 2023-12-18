@@ -13,6 +13,7 @@ export default defineConfig({
       features: resolve(root, "features"),
       routes: resolve(root, "routes"),
       utils: resolve(root, "utils"),
+      hooks: resolve(root, "hooks"),
     },
   },
 });

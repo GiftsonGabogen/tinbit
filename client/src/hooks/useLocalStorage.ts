@@ -4,8 +4,8 @@ export enum LocalStorageEnum {
 }
 
 export default (key: LocalStorageEnum) => {
-  const setItem = (value: unknown) => {
-    window.localStorage.setItem(key, JSON.stringify(value));
+  const setItem = (value: string) => {
+    window.localStorage.setItem(key, value);
   };
 
   const getItem = (): string | null => {

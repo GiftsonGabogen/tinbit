@@ -1,54 +1,55 @@
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
 
-const urls: ShortUrlType[] = [
-  {
-    id: 1,
-    name: "affordable bags",
-    shortUrl: "https://tinbit.co/asddw",
-    urls: [
-      {
-        urlId: 1,
-        link: "https://amazon.com/bag1",
-        website: "amazon",
-        name: "amazon bag",
-        image:
-          "https://brandlogos.net/wp-content/uploads/2016/10/amazon-logo-preview.png",
-      },
-      {
-        urlId: 2,
-        link: "https://bestbuy.com/bag2",
-        website: "bestbuy",
-        name: "bestbuy bag",
-        image:
-          "https://brandlogos.net/wp-content/uploads/2021/05/best-buy-logo.png",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "sample bags ph",
-    shortUrl: "https://tinbit.co/asddw",
-    urls: [
-      {
-        urlId: 1,
-        link: "https://lazada.com/bag1",
-        website: "lazada",
-        name: "lazada bag",
-        image:
-          "https://brandlogos.net/wp-content/uploads/2016/10/amazon-logo-preview.png",
-      },
-      {
-        urlId: 2,
-        link: "https://shopee.com/bag2",
-        website: "shopee",
-        name: "shopee bag",
-        image:
-          "https://brandlogos.net/wp-content/uploads/2021/05/best-buy-logo.png",
-      },
-    ],
-  },
-];
+const urls: ShortUrlType[] = [];
+//  [
+//   {
+//     id: 1,
+//     name: "affordable bags",
+//     shortUrl: "https://tinbit.co/asddw",
+//     urls: [
+//       {
+//         urlId: 1,
+//         link: "https://amazon.com/bag1",
+//         website: "amazon",
+//         name: "amazon bag",
+//         image:
+//           "https://brandlogos.net/wp-content/uploads/2016/10/amazon-logo-preview.png",
+//       },
+//       {
+//         urlId: 2,
+//         link: "https://bestbuy.com/bag2",
+//         website: "bestbuy",
+//         name: "bestbuy bag",
+//         image:
+//           "https://brandlogos.net/wp-content/uploads/2021/05/best-buy-logo.png",
+//       },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     name: "sample bags ph",
+//     shortUrl: "https://tinbit.co/asddw",
+//     urls: [
+//       {
+//         urlId: 1,
+//         link: "https://lazada.com/bag1",
+//         website: "lazada",
+//         name: "lazada bag",
+//         image:
+//           "https://brandlogos.net/wp-content/uploads/2016/10/amazon-logo-preview.png",
+//       },
+//       {
+//         urlId: 2,
+//         link: "https://shopee.com/bag2",
+//         website: "shopee",
+//         name: "shopee bag",
+//         image:
+//           "https://brandlogos.net/wp-content/uploads/2021/05/best-buy-logo.png",
+//       },
+//     ],
+//   },
+// ];
 
 export interface ShortUrlType {
   id: string | number;
@@ -95,7 +96,6 @@ const Url = () => {
           <div className="basis-full">
             {urls.length > 0 &&
               urls.map((url) => {
-                console.log(url.id === currentLink?.id);
                 return (
                   <div
                     className={`w-full bg-gray-50 ${

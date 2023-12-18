@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import NewOAuthClient from "@utils/newOAuthClient";
 import "@utils/config";
-import { checkIfEmailExist } from "@controllers/common/email";
+import { checkIfEmailExist, getUserByEmail } from "@controllers/common/email";
 import { getUser } from "@utils/queries";
 import Pool from "@utils/db";
 
@@ -13,23 +13,11 @@ export default async (req: Request, res: Response) => {
 
   const doesEmailExist = await checkIfEmailExist(tokenInfo?.email);
 
+  const { access_token, refresh_token } = tokens;
+
   if (doesEmailExist) {
-    const User = await Pool.query(getUser, [tokenInfo?.email]);
-    const {
-      firstname: firstName,
-      lastname: lastName,
-      email,
-      profile_pic_url: profilePicUrl,
-    } = User.rows[0];
-    const { access_token, refresh_token } = tokens;
-    res.status(200).json({
-      firstName,
-      lastName,
-      email,
-      profilePicUrl,
-      access_token,
-      refresh_token,
-    });
+    const User = await getUserByEmail(tokenInfo?.email);
+    res.status(200).json({ ...User, access_token, refresh_token });
   } else {
     res
       .status(403)

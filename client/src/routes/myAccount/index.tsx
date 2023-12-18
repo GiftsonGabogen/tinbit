@@ -6,13 +6,15 @@ type ProfileDetailsProps = { type: string; value: string };
 const ProfileDetails = ({ details }: { details: ProfileDetailsProps[] }) => (
   <div className="my-1 flex gap-3">
     <div>
-      {details.map((detail) => (
-        <p>{detail.type}: </p>
+      {details.map((detail, i) => (
+        <p key={i}>{detail.type}: </p>
       ))}
     </div>
     <div>
-      {details.map((detail) => (
-        <p className="text-gray-600">{detail.value}</p>
+      {details.map((detail, i) => (
+        <p key={i} className="text-gray-600">
+          {detail.value}
+        </p>
       ))}
     </div>
   </div>

@@ -1,15 +1,49 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { getUser } from "features/user/userSelectors";
 import { useSelector } from "react-redux";
+import useLocalStorage, { LocalStorageEnum } from "hooks/useLocalStorage";
+import { useState } from "react";
+import useAuthDetails from "hooks/useAuthDetails";
 
 function RequireAuth() {
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const user = useSelector(getUser);
-  return user?.email ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
-  );
+  const { getItem } = useLocalStorage(LocalStorageEnum.REFRESH_TOKEN);
+  const { setUserAuthDetails } = useAuthDetails();
+  // const { getItem: getAccessTokenItem } = useLocalStorage(
+  //   LocalStorageEnum.ACCESS_TOKEN
+  // );
+  // const accessToken = getAccessTokenItem();
+  const refreshToken = getItem();
+
+  const getNewAccTokenWithRefToken = async () => {
+    const res = await fetch("http://localhost:8000/api/auth/refresh-token", {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    });
+
+    if (res.ok) {
+      // TODO: get the info then save to state
+      const Data = await res.json();
+      setUserAuthDetails(Data);
+    }
+    setIsLoading(false);
+  };
+  if (!user.email) {
+    if (isLoading) {
+      getNewAccTokenWithRefToken();
+    }
+    if (!isLoading) {
+      return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+  } else {
+    return <Outlet />;
+  }
+
+  // return <Navigate to="/login" state={{ from: location }} replace />;
+  // return <Outlet />;
 }
 
 export default RequireAuth;

@@ -1,11 +1,9 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import useLocalStorage, { LocalStorageEnum } from "../../hooks/useLocalStorage";
-import { useDispatch } from "react-redux";
-import { setUser } from "features/user/userSlice";
 import BigGoogleButtonIcon from "routes/Common/BigGoogleButtonIcon";
 import type { CodeResponse, NonOAuthError } from "@react-oauth/google";
+import useAuthDetails from "hooks/useAuthDetails";
 
 function Login() {
   // error message
@@ -13,14 +11,7 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  // tokens
-  const { setItem: setAccessTokenItem } = useLocalStorage(
-    LocalStorageEnum.ACCESS_TOKEN
-  );
-  const { setItem: setRefreshTokenItem } = useLocalStorage(
-    LocalStorageEnum.REFRESH_TOKEN
-  );
-  const dispatch = useDispatch();
+  const { setUserAuthDetails } = useAuthDetails();
 
   const from = location?.state?.from?.pathname || "/";
 
@@ -33,24 +24,10 @@ function Login() {
         code: codeResponse.code,
       }),
     });
-    console.log(res);
 
     if (res.ok) {
       const resData = await res.json();
-      const {
-        access_token,
-        refresh_token,
-        firstName,
-        lastName,
-        profilePicUrl,
-        email,
-      } = resData;
-
-      dispatch(
-        setUser({ firstName, lastName, profilePic: profilePicUrl, email })
-      );
-      setAccessTokenItem(access_token);
-      setRefreshTokenItem(refresh_token);
+      setUserAuthDetails(resData);
       navigate(from);
     } else {
       setError("Email is not registered");

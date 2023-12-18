@@ -25,7 +25,8 @@
       "components/*": ["./components/*"],
       "features/*": ["./features/*"],
       "routes/*": ["./routes/*"],
-      "utils/*": ["./utils/*"]
+      "utils/*": ["./utils/*"],
+      "hooks/*": ["./hooks/*"]
     }
   },
   "include": ["src"],

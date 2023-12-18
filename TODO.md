@@ -14,7 +14,7 @@ Login
 
 - [x] C - go to a protected route
 - [x] C - check state(memory) if there is a user login, access granted else
-- [ ] C - check the access and refresh token from local storage or cookie, then validate on backend. [SKIPPED]
+- [ ] C - check the access and refresh token from local storage or cookie, then validate on backend. [DOING] continue on after refresh token get again the user info then return to the client and on client save the info on state
 - [ ] S - validate tokens, if access is expired, get new access token using refresh. if successful, send back to
 
 CSS

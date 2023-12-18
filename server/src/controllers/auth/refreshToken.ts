@@ -1,29 +1,41 @@
+import NewOAuthClient from "@utils/newOAuthClient";
 import { Request, Response } from "express";
-import { UserRefreshClient } from "google-auth-library";
 import "@utils/config";
+import { UserRefreshClient } from "google-auth-library";
+import { checkIfEmailExist, getUserByEmail } from "@controllers/common/email";
 
 export default async (req: Request, res: Response) => {
-  // const user = new UserRefreshClient(
-  //   process.env.GOOGLE_OAUTH_CLIENT_ID,
-  //   process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-  //   req.body.refreshToken
-  // );
-  // const { credentials } = await user.refreshAccessToken(); // optain new tokens
-  // res.json(credentials);
+  const authHeader = req.headers.authorization;
 
-  const body = new URLSearchParams({
-    client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
-    client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-    grant_type: "refresh_token",
-    refresh_token: req.body.refreshToken,
-    redirect_uri: "postmessage",
-  });
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-  const data = await fetch("https://oauth2.googleapis.com/token", {
-    method: "POST",
-    body,
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  });
-  const resData = await data.json();
-  res.json(resData);
+  const refreshToken = authHeader && authHeader.split(" ")[1];
+
+  if (refreshToken) {
+    try {
+      const oAuth2Client = NewOAuthClient();
+      const user = new UserRefreshClient(
+        process.env.GOOGLE_OAUTH_CLIENT_ID,
+        process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+        refreshToken
+      );
+      const { credentials } = await user.refreshAccessToken(); // optain new tokens
+      const { access_token, refresh_token } = credentials;
+      const tokenInfo = await oAuth2Client.getTokenInfo(access_token);
+
+      const doesEmailExist = await checkIfEmailExist(tokenInfo?.email);
+
+      if (doesEmailExist) {
+        const User = await getUserByEmail(tokenInfo?.email);
+        return res.json({ ...User, access_token, refresh_token });
+      } else {
+        return res.status(403).json({ message: "not authenticated" });
+      }
+    } catch (error) {
+      return res.status(403).json({ message: "not authenticated" });
+    }
+  } else {
+    return res.status(403).json({ message: "not authenticated" });
+  }
 };
