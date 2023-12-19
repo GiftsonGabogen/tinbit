@@ -9,7 +9,7 @@ CREATE TABLE website (
    website_id serial PRIMARY KEY,
    website_link VARCHAR ( 50 ) NOT NULL,
    website_image VARCHAR ( 50 ),
-   website_name VARCHAR ( 50 ),
+   website_name VARCHAR ( 50 )
 );
 
 CREATE TABLE url (

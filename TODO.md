@@ -32,9 +32,9 @@ Displaying Links
   - [ ] - server send back the info to the client - SS
   - [ ] - client get the info then extract it - FE
   - [ ] - display the links with the info - FE
-- [ ] - add websites and info
-  - [ ] - get logos, website name of every possible website
-  - [ ] - add it to the database - Postman, etc
+- [x] - add websites and info
+  - [x] - get logos, website name of every possible website
+  - [x] - add it to the database - Postman, etc
 - [ ] - on user login or re auth, fetch list of websites
   - [ ] - create redux for websites - FE
   - [ ] - create fetch all websites data on server - SS

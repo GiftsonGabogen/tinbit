@@ -28,3 +28,6 @@ JOIN
     website ON website_url.website_id = website.website_id
 WHERE
     person.person_id = $1`;
+
+export const createWebsite =
+  "INSERT INTO website (website_link, website_image, website_name) VALUES($1, $2, $3)";

@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import "@utils/config";
 import authRouter from "@routes/auth";
 import userRouter from "@routes/user";
+import websiteRouter from "@routes/website";
 
 const port = process.env.PORT || 5000;
 
@@ -30,11 +31,9 @@ app.use(express.json());
 app.use(cookieParser());
 //middlewares>
 
-app.get("/api", (req: Request, res: Response) => {
-  res.send("Hello Worlda");
-});
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/website", websiteRouter);
 
 app.listen(port, () => {
   console.log(`app listening at port ${port}`);
