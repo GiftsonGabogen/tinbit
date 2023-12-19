@@ -11,10 +11,7 @@ function RequireAuth() {
   const user = useSelector(getUser);
   const { getItem } = useLocalStorage(LocalStorageEnum.REFRESH_TOKEN);
   const { setUserAuthDetails } = useAuthDetails();
-  // const { getItem: getAccessTokenItem } = useLocalStorage(
-  //   LocalStorageEnum.ACCESS_TOKEN
-  // );
-  // const accessToken = getAccessTokenItem();
+
   const refreshToken = getItem();
 
   const getNewAccTokenWithRefToken = async () => {

@@ -2,8 +2,6 @@ import { Request, Response } from "express";
 import NewOAuthClient from "@utils/newOAuthClient";
 import "@utils/config";
 import { checkIfEmailExist, getUserByEmail } from "@controllers/common/email";
-import { getUser } from "@utils/queries";
-import Pool from "@utils/db";
 
 const oAuth2Client = NewOAuthClient();
 
