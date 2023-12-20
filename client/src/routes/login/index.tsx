@@ -15,7 +15,6 @@ function Login() {
 
   const from = location?.state?.from?.pathname || "/";
 
-  // FIXME: refactor this, duplicate code with register page
   const onLoginSuccess = async (codeResponse: { code: string }) => {
     const res = await fetch(
       `${import.meta.env.VITE_API_SERVER_URL}/auth/login`,
