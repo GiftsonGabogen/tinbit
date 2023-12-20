@@ -25,17 +25,26 @@ function ShortUrl() {
     return <div>Loading...</div>;
   }
   if (isError || !data?.data?.length) {
-    <ErrorPage />;
+    return <ErrorPage />;
   }
 
   console.log(data);
   return (
     <div>
-      <h1>{params.short_url}</h1>
-      <div id="links">
+      <div
+        id="links"
+        className="flex w-full flex-wrap justify-center items-center"
+      >
         {data.data.map((url: any) => {
           return (
-            <div key={url.short_url_link + url.link}>{url.website_name}</div>
+            <div className="w-full md:w-96 text-center p-12">
+              <div key={url.short_url_link + url.link}>{url.website_name}</div>
+              <img
+                className="w-full"
+                src={`http://localhost:5173/assets/images/websites/${url.website_image}`}
+                alt=""
+              />
+            </div>
           );
         })}
       </div>
