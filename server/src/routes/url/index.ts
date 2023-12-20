@@ -5,14 +5,17 @@ import {
   CreateUrl,
   CreateWebsiteUrl,
   GetShortUrlWithUrlsAndWebsites,
+  GetWebsite,
 } from "@controllers/url";
 // import getUser from "../../controllers/user/getUser";
 const Router = express.Router();
+
+Router.get("/short_url", GetShortUrlWithUrlsAndWebsites);
+Router.get("/website", GetWebsite);
 
 Router.post("/website", CreateWebsite);
 Router.post("/short_url", CreateShortUrl);
 Router.post("/url", CreateUrl);
 Router.post("/website_url", CreateWebsiteUrl);
-Router.get("/short_url", GetShortUrlWithUrlsAndWebsites);
 
 export default Router;
