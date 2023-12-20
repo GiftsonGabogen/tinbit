@@ -89,17 +89,20 @@ function Register() {
 
   const handleRegisterSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:8000/api/user/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        profilePic,
-        email,
-        password,
-      }),
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_SERVER_URL}/user/register`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          profilePic,
+          email,
+          password,
+        }),
+      }
+    );
     if (res.ok) {
       const responseData = await res.json();
       if (responseData.statusMessage === "Failed") {

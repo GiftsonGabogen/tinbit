@@ -15,11 +15,14 @@ function RequireAuth() {
   const refreshToken = getItem();
 
   const getNewAccTokenWithRefToken = async () => {
-    const res = await fetch("http://localhost:8000/api/auth/refresh-token", {
-      headers: {
-        Authorization: `Bearer ${refreshToken}`,
-      },
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_SERVER_URL}/auth/refresh-token`,
+      {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+        },
+      }
+    );
 
     if (res.ok) {
       // TODO: get the info then save to state

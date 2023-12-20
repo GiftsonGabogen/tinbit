@@ -27,11 +27,11 @@ Displaying Links
 
 - [x] - Add Routing for the pages - FE
 - [ ] - Display Links with the images
-  - [ ] - user go to page, front end call to server using the page unique link - FE
-  - [ ] - server get the unique link, server call to db to get the page info - SS
-  - [ ] - server send back the info to the client - SS
-  - [ ] - client get the info then extract it - FE
-  - [ ] - display the links with the info - FE
+  - [x] - user go to page, front end call to server using the page unique link - FE
+  - [x] - server get the unique link, server call to db to get the page info - SS
+  - [x] - server send back the info to the client - SS
+  - [x] - client get the info then extract it - FE
+  - [x] - display the links with the info - FE
 - [x] - add websites and info
   - [x] - get logos, website name of every possible website
   - [x] - add it to the database - Postman, etc

@@ -17,13 +17,16 @@ function Login() {
 
   // FIXME: refactor this, duplicate code with register page
   const onLoginSuccess = async (codeResponse: { code: string }) => {
-    const res = await fetch("http://localhost:8000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        code: codeResponse.code,
-      }),
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_SERVER_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: codeResponse.code,
+        }),
+      }
+    );
 
     if (res.ok) {
       const resData = await res.json();
