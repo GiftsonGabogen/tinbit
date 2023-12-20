@@ -20,6 +20,6 @@ export const websiteSlice = createSlice({
   reducers: websiteReducers,
 });
 
-export const { setUser } = websiteSlice.actions;
+export const { setWebsites } = websiteSlice.actions;
 
 export default websiteSlice.reducer;

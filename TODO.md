@@ -35,13 +35,13 @@ Displaying Links
 - [x] - add websites and info
   - [x] - get logos, website name of every possible website
   - [x] - add it to the database - Postman, etc
-- [ ] - on user login or re auth, fetch list of websites
+- [x] - on user login or re auth, fetch list of websites
   - [x] - create redux for websites - FE
   - [x] - create fetch all websites data on server - SS
   - [x] - return websites info - SS
-  - [ ] - create set websites using redux setState - FE
-  - [ ] - on login, fetch websites - FE
-  - [ ] - after fetched, save into redux state - FE
+  - [x] - create set websites using redux setState - FE
+  - [x] - on login, fetch websites - FE
+  - [x] - after fetched, save into redux state - FE
 - [ ] - Add Create Link functionality - Front End
   - [ ] - Create Modal with form of Add Name - FE
   - [ ] - Second Step after Add Name is Add Links - FE

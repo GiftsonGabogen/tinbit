@@ -37,8 +37,11 @@ function ShortUrl() {
       >
         {data.data.map((url: any) => {
           return (
-            <div className="w-full md:w-96 text-center p-12">
-              <div key={url.short_url_link + url.link}>{url.website_name}</div>
+            <div
+              className="w-full md:w-96 text-center p-12"
+              key={url.short_url_link + url.link}
+            >
+              <div>{url.website_name}</div>
               <img
                 className="w-full"
                 src={`http://localhost:5173/assets/images/websites/${url.website_image}`}

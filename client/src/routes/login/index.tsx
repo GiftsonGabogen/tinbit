@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import BigGoogleButtonIcon from "routes/Common/BigGoogleButtonIcon";
 import type { CodeResponse, NonOAuthError } from "@react-oauth/google";
 import useAuthDetails from "hooks/useAuthDetails";
+import { setWebsites } from "features/websites/websiteSlice";
+import { useDispatch } from "react-redux";
 
 function Login() {
   // error message
@@ -11,6 +13,9 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   const { setUserAuthDetails } = useAuthDetails();
 
   const from = location?.state?.from?.pathname || "/";
@@ -28,8 +33,16 @@ function Login() {
     );
 
     if (res.ok) {
+      const getWebsitesRes = await fetch(
+        `${import.meta.env.VITE_API_SERVER_URL}/url/website`
+      );
+
+      const getWebsitesResData = await getWebsitesRes.json();
+
       const resData = await res.json();
+
       setUserAuthDetails(resData);
+      dispatch(setWebsites({ websites: getWebsitesResData?.data }));
       navigate(from);
     } else {
       setError("Email is not registered");

@@ -1,9 +1,10 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { getUser } from "features/user/userSelectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useLocalStorage, { LocalStorageEnum } from "hooks/useLocalStorage";
 import { useState } from "react";
 import useAuthDetails from "hooks/useAuthDetails";
+import { setWebsites } from "features/websites/websiteSlice";
 
 function RequireAuth() {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +12,8 @@ function RequireAuth() {
   const user = useSelector(getUser);
   const { getItem } = useLocalStorage(LocalStorageEnum.REFRESH_TOKEN);
   const { setUserAuthDetails } = useAuthDetails();
+
+  const dispatch = useDispatch();
 
   const refreshToken = getItem();
 
@@ -25,8 +28,14 @@ function RequireAuth() {
     );
 
     if (res.ok) {
-      // TODO: get the info then save to state
+      const getWebsitesRes = await fetch(
+        `${import.meta.env.VITE_API_SERVER_URL}/url/website`
+      );
+
+      const getWebsitesResData = await getWebsitesRes.json();
+
       const Data = await res.json();
+      dispatch(setWebsites({ websites: getWebsitesResData?.data }));
       setUserAuthDetails(Data);
     }
     setIsLoading(false);
