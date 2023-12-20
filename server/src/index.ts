@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import "@utils/config";
 import authRouter from "@routes/auth";
 import userRouter from "@routes/user";
-import websiteRouter from "@routes/website";
+import urlRouter from "@routes/url";
 
 const port = process.env.PORT || 5000;
 
@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
-app.use("/api/website", websiteRouter);
+app.use("/api/url", urlRouter);
 
 app.listen(port, () => {
   console.log(`app listening at port ${port}`);
